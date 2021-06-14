@@ -1,0 +1,42 @@
+h1 {
+    text-align: center;
+    padding: 23px;
+    background-color: rgb(177, 177, 204);
+    color: white;
+}
+
+#clear {
+    width: 270px;
+    border: 3px solid gray;
+    border-radius: 3px;
+    padding: 20px;
+    background-color: red;
+}
+
+.formstyle {
+    width: 300px;
+    height: 530px;
+    margin: auto;
+    border: 3px solid #000;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+button {
+    width: 20px;
+    background-color: rgb(109, 117, 109);
+    color: white;
+    border: 3px solid gray;
+    border-radius: 5px;
+    padding: 26px;
+    margin: 5px;
+    font-size: 15px;
+}
+
+.output {
+    width: 250px;
+    border: 3px solid black;
+    border-radius: 3px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
