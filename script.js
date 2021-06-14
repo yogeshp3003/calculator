@@ -1,7 +1,6 @@
 class Calculator {
-    constructor(firstInputText, secondInputText) {
-        this.firstInputText = firstInputText
-        this.secondInputText = secondInputText
+    constructor(inputText) {
+        this.inputText = inputText
         this.clear()
     }
 
@@ -73,10 +72,10 @@ class Calculator {
 
     updateDisplay() {
         if (this.operation != null) {
-            this.firstInputText.innerText =
+            this.inputText.innerText =
                 `${this.getDisplayNumber(this.firstInput)} ${this.operation} ${this.getDisplayNumber(this.secondInput)}`
         } else {
-            this.firstInputText.innerText = `${ this.getDisplayNumber(this.secondInput)}`
+            this.inputText.innerText = `${ this.getDisplayNumber(this.secondInput)}`
         }
     }
 }
@@ -85,10 +84,9 @@ const numberButtons = document.querySelectorAll('[data-number]')
 const operationButtons = document.querySelectorAll('[data-operation]')
 const equalsButton = document.querySelector('[data-equals]')
 const allClearButton = document.querySelector('[data-all-clear]')
-const firstInputText = document.querySelector('[data-first-input]')
-const secondInputText = document.querySelector('[data-second-input]')
+const inputText = document.querySelector('[data-first-input]')
 
-const calculator = new Calculator(firstInputText, secondInputText)
+const calculator = new Calculator(inputText)
 
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
