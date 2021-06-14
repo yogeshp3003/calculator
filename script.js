@@ -19,19 +19,20 @@ class Calculator {
     chooseOperation(operation) {
         if (this.secondInput === '') return
         if (this.firstInput !== '') {
-            this.compute()
+            this.result()
         }
         this.operation = operation
         this.firstInput = this.secondInput
         this.secondInput = ''
     }
 
-    compute() {
+    result() {
         let result
         const prev = parseFloat(this.firstInput)
         const current = parseFloat(this.secondInput)
 
         if (isNaN(prev) || isNaN(current)) return
+
         switch (this.operation) {
             case '+':
                 result = prev + current
@@ -42,8 +43,10 @@ class Calculator {
             case '*':
                 result = prev * current
                 break
-            case '÷':
+            case '/':
                 result = prev / current
+                break
+            default:
                 break
         }
         this.secondInput = result
@@ -69,13 +72,11 @@ class Calculator {
     }
 
     updateDisplay() {
-        this.secondInputText.innerText =
-            this.getDisplayNumber(this.secondInput)
         if (this.operation != null) {
             this.firstInputText.innerText =
-                `${this.getDisplayNumber(this.firstInput)} ${this.operation}`
+                `${this.getDisplayNumber(this.firstInput)} ${this.operation} ${this.getDisplayNumber(this.secondInput)}`
         } else {
-            this.firstInputText.innerText = ''
+            this.firstInputText.innerText = `${ this.getDisplayNumber(this.secondInput)}`
         }
     }
 }
@@ -104,7 +105,7 @@ operationButtons.forEach(button => {
 })
 
 equalsButton.addEventListener('click', button => {
-    calculator.compute()
+    calculator.result()
     calculator.updateDisplay()
 })
 
