@@ -12,7 +12,7 @@ class Calculator {
 
     appendNumber(number) {
         if (number === '.' && this.secondInput.includes('.')) return
-        this.secondInput = this.secondInput.toString() + number.toString()
+        this.secondInput = this.secondInput + number
     }
 
     chooseOperation(operation) {
@@ -53,29 +53,12 @@ class Calculator {
         this.firstInput = ''
     }
 
-    getDisplayNumber(number) {
-        const stringNumber = number.toString()
-        const integerDigits = parseFloat(stringNumber.split('.')[0])
-        const decimalDigits = stringNumber.split('.')[1]
-        let integerDisplay
-        if (isNaN(integerDigits)) {
-            integerDisplay = ''
-        } else {
-            integerDisplay = integerDigits.toLocaleString('en', { maximumFractionDigits: 0 })
-        }
-        if (decimalDigits != null) {
-            return `${integerDisplay}.${decimalDigits}`
-        } else {
-            return integerDisplay
-        }
-    }
-
     updateDisplay() {
         if (this.operation != null) {
             this.inputText.innerText =
-                `${this.getDisplayNumber(this.firstInput)} ${this.operation} ${this.getDisplayNumber(this.secondInput)}`
+                `${this.firstInput} ${this.operation} ${this.secondInput}`
         } else {
-            this.inputText.innerText = `${ this.getDisplayNumber(this.secondInput)}`
+            this.inputText.innerText = `${ this.secondInput}`
         }
     }
 }
@@ -111,3 +94,31 @@ allClearButton.addEventListener('click', button => {
     calculator.clear()
     calculator.updateDisplay()
 })
+
+window.addEventListener("keydown", (e) => {
+    if (
+        e.key === "0" ||
+        e.key === "1" ||
+        e.key === "2" ||
+        e.key === "3" ||
+        e.key === "4" ||
+        e.key === "5" ||
+        e.key === "6" ||
+        e.key === "7" ||
+        e.key === "8" ||
+        e.key === "9" ||
+        e.key === "."
+    ) {
+        calculator.appendNumber(e.key)
+        calculator.updateDisplay()
+    } else if (e.key === "+" || e.key === "-" || e.key === "/" || e.key === "*") {
+        calculator.chooseOperation(e.key)
+        calculator.updateDisplay()
+    } else if (e.key === "Enter" || e.key === "=") {
+        calculator.result()
+        calculator.updateDisplay()
+    } else if (e.key === "Delete") {
+        calculator.clear()
+        calculator.updateDisplay()
+    }
+});
