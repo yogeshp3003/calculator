@@ -55,10 +55,11 @@ class Calculator {
 
     updateDisplay() {
         if (this.operation != null) {
-            this.inputText.innerText =
-                `${this.firstInput} ${this.operation} ${this.secondInput}`
+            this.inputText.innerText = `${this.firstInput} ${this.operation} ${this.secondInput}`
+            document.getElementById("screen").value = this.inputText.innerText
         } else {
-            this.inputText.innerText = `${ this.secondInput}`
+            this.inputText.innerText = `${this.secondInput}`
+            document.getElementById("screen").value = this.inputText.innerText
         }
     }
 }
@@ -67,7 +68,7 @@ const numberButtons = document.querySelectorAll('[data-number]')
 const operationButtons = document.querySelectorAll('[data-operation]')
 const equalsButton = document.querySelector('[data-equals]')
 const allClearButton = document.querySelector('[data-all-clear]')
-const inputText = document.querySelector('[data-first-input]')
+const inputText = document.querySelectorAll('[data-input]')
 
 const calculator = new Calculator(inputText)
 
