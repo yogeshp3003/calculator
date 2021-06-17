@@ -12,7 +12,7 @@ class Calculator {
 
     appendNumber(number) {
         if (number === '.' && this.secondInput.includes('.')) return
-        this.secondInput = this.secondInput + number
+        this.secondInput = this.secondInput.toString() + number.toString()
     }
 
     chooseOperation(operation) {
@@ -54,7 +54,7 @@ class Calculator {
     }
 
     updateDisplay() {
-        if (this.operation != null) {
+        if (this.operation) {
             this.inputText.innerText = `${this.firstInput} ${this.operation} ${this.secondInput}`
             document.getElementById("screen").value = this.inputText.innerText
         } else {
@@ -68,14 +68,21 @@ const numberButtons = document.querySelectorAll('[data-number]')
 const operationButtons = document.querySelectorAll('[data-operation]')
 const equalsButton = document.querySelector('[data-equals]')
 const allClearButton = document.querySelector('[data-all-clear]')
-const inputText = document.querySelectorAll('[data-input]')
+    // const inputText = document.querySelectorAll('[data-input]')
+const inputText = document.querySelectorAll('screen')
+
+let result = false;
 
 const calculator = new Calculator(inputText)
 
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
-        calculator.appendNumber(button.innerText)
-        calculator.updateDisplay()
+        if (!result) {
+            calculator.appendNumber(button.innerText)
+            calculator.updateDisplay()
+        } else {
+            result = false
+        }
     })
 })
 
@@ -116,6 +123,7 @@ window.addEventListener("keydown", (e) => {
         calculator.chooseOperation(e.key)
         calculator.updateDisplay()
     } else if (e.key === "Enter" || e.key === "=") {
+        result = true
         calculator.result()
         calculator.updateDisplay()
     } else if (e.key === "Delete") {

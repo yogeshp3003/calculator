@@ -31,6 +31,7 @@ button {
     padding: 26px;
     margin: 5px;
     font-size: 15px;
+    outline: none;
 }
 
 .output {
